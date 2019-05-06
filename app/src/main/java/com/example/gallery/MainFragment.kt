@@ -12,6 +12,10 @@ import android.widget.Toast
 
 class MainFragment : Fragment() {
 
+    val temporaryClass = TemporaryClass()
+    var imageList = ArrayList<ImageView>()
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,15 +32,12 @@ class MainFragment : Fragment() {
         temporaryClass.sortPictures()
         showPictures()
 
+
     }
 
     /****************/
 
-    val temporaryClass = TemporaryClass()
-    var imageList = ArrayList<ImageView>()
-
-
-    fun addImages() {
+     fun addImages() {
 
         imageList.add(activity!!.findViewById(R.id.imageView1))
         imageList.add(activity!!.findViewById(R.id.imageView2))
@@ -90,6 +91,7 @@ class MainFragment : Fragment() {
 
         Toast.makeText(activity, "You clicked on ImageView $id", Toast.LENGTH_SHORT).show()
 
+
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
 
             var myintent = Intent(activity, Main2Activity::class.java)
@@ -97,8 +99,7 @@ class MainFragment : Fragment() {
             startActivity(myintent)
         } else {
             var frag = fragmentManager!!.findFragmentById(R.id.main2fragment) as Main2Fragment
-//            frag.pictureActivity(id)
-            frag.pictureActivity()
+            frag.pictureActivity(id)
         }
 
 

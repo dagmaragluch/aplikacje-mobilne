@@ -18,13 +18,8 @@ class TemporaryClass {
 
 
     fun sortPictures() {
-//        pictures.sortWith(compareBy { it.rating })
         pictures.sortByDescending { selector(it) }
-        pictures.forEach { println(it) }
-
+       // pictures.forEach { println(it) }
     }
 
-
-    //pobieranie i tworzenie listy zdjęć
-    //sortowanie
 }

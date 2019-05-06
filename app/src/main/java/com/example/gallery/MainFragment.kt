@@ -1,5 +1,7 @@
 package com.example.gallery
 
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment() {
 
@@ -46,11 +47,7 @@ class MainFragment : Fragment() {
 
         for (i in imageList.indices) {
             imageList[i].setOnClickListener {
-                Toast.makeText(
-                    activity,
-                    "You clicked on ImageView.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                onImageClick(i)
             }
         }
     }
@@ -63,7 +60,47 @@ class MainFragment : Fragment() {
         }
     }
 
-    fun pictureActivity() {
+    /*fun onClick(view: View) {
+        var s = when (view) {
+            button1 -> "button 1"
+            button2 -> "button 2"
+            else -> "button 3"
+        }
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            var myintent = Intent(activity, Main2Activity::class.java)
+            myintent.putExtra("data", s)
+            startActivity(myintent)
+        } else {
+            var frag = fragmentManager!!.findFragmentById(R.id.main2fragment) as Main2Fragment
+            frag.display(s)
+        }
+    }*/
+
+
+    /*override fun onFragmentInteraction(picture: Picture) {
+        val intent = Intent()
+        intent.putExtra("newRating",picture.rating)
+        intent.putExtra("newDescription", picture.description)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }*/
+
+
+    fun onImageClick(id: Int) {
+
+        Toast.makeText(activity, "You clicked on ImageView $id", Toast.LENGTH_SHORT).show()
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+            var myintent = Intent(activity, Main2Activity::class.java)
+            myintent.putExtra("data", id)
+            startActivity(myintent)
+        } else {
+            var frag = fragmentManager!!.findFragmentById(R.id.main2fragment) as Main2Fragment
+//            frag.pictureActivity(id)
+            frag.pictureActivity()
+        }
+
 
     }
 

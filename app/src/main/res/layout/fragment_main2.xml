@@ -20,7 +20,7 @@
                 android:contentDescription="@string/app_name" android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/textView"/>
         <TextView
-                android:text="TextView"
+                android:text="Dodaj opis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/textView"
                 app:layout_constraintStart_toStartOf="parent"

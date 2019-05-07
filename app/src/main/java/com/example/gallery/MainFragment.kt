@@ -27,8 +27,10 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        temporaryClass.addPictures()
-        addImages()
+       // if (temporaryClass.pictures.isEmpty()) {
+            temporaryClass.addPictures()
+            addImages()
+      //  }
         temporaryClass.sortPictures()
         showPictures()
 
@@ -37,7 +39,7 @@ class MainFragment : Fragment() {
 
     /****************/
 
-     fun addImages() {
+    fun addImages() {
 
         imageList.add(activity!!.findViewById(R.id.imageView1))
         imageList.add(activity!!.findViewById(R.id.imageView2))

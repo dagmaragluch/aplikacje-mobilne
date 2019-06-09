@@ -17,7 +17,7 @@
             android:id="@+id/floatingActionButton"
             app:layout_constraintEnd_toEndOf="@+id/listView1"
             android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
-            android:onClick="addTask"
+            android:onClick="addItem"
             app:layout_constraintBottom_toBottomOf="@+id/listView1"/>
 
 

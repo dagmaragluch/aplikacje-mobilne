@@ -1,13 +1,10 @@
 package com.example.todo
 
 import android.content.Context
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-
-
 class MyArrayAdapter(context: Context, tasks: ArrayList<Task>) :
     ArrayAdapter<Task>(context, R.layout.item_layout, tasks) {
 
@@ -19,17 +16,19 @@ class MyArrayAdapter(context: Context, tasks: ArrayList<Task>) :
         internal var priority: TextView? = null
     }
 
+    private lateinit var viewHolder: ItemViewHolder
+
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
 
         var view = view
-        val viewHolder: ItemViewHolder
+//        val viewHolder: ItemViewHolder
         lateinit var inflater : LayoutInflater
         if (view == null) {
              inflater = LayoutInflater.from(context)
             view = inflater.inflate(R.layout.item_layout, parent, false)
 
             viewHolder = ItemViewHolder()
-            viewHolder.text = view!!.findViewById<View>(R.id.textTitle) as TextView
+            viewHolder.text = view!!.findViewById<View>(R.id.editTitle) as TextView
             viewHolder.deadline = view.findViewById<View>(R.id.textDeadline) as TextView
 //            viewHolder.image = view.findViewById<View>(R.id.imageView) as ImageView
             viewHolder.priority = view.findViewById<View>(R.id.textPriority) as TextView
@@ -59,22 +58,29 @@ class MyArrayAdapter(context: Context, tasks: ArrayList<Task>) :
 
 
     /**************/
-//            val builder = AlertDialog.Builder(context!!)
-////            val inflater = layoutInflater
-//            builder.setTitle("EditText")
-//            val dialogLayout = inflater.inflate(R.layout.alert_dialog_with_edittext, null)
-//            val editText = dialogLayout.findViewById<EditText>(R.id.editText)
-//            builder.setView(dialogLayout)
-//            builder.setPositiveButton("OK") { dialogInterface, i ->
+
+//    fun editTitle(){
+//        val builder = AlertDialog.Builder(context)
+//        val inflater = layoutInflater
+//        builder.setTitle("EditText")
+//        val dialogLayout = inflater.inflate(R.layout.item_layout, null)
+//        val editText = dialogLayout.findViewById<EditText>(R.id.editText)
+//        builder.setView(dialogLayout)
+//        builder.setPositiveButton("OK") { dialogInterface, i ->
 //
-//                var string = editText.text.toString()
-//                //println("STRING w editText = $string")
-//                mainFragment.temporaryClass.pictures[nr].description = string
+//            var string = editText.text.toString()
+//            //println("STRING w editText = $string")
+//            mainFragment.temporaryClass.pictures[nr].description = string
 ////                items[position]
-//                viewHolder.text!!.text = items.text
-//            }
-//            builder.show()
+//            viewHolder.text!!.text = items.text
+//        }
+//        builder.show()
+//    }
+
+
     /*************/
 
 
 }
+
+

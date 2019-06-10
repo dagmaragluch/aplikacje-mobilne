@@ -7,12 +7,12 @@
             android:text="TitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textTitle" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:textSize="18sp" app:layout_constraintStart_toEndOf="@+id/imageView"
-            android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/textDeadline"/>
+            android:id="@+id/editTitle"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/imageView"
+            android:layout_marginStart="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="28dp" app:layout_constraintBottom_toTopOf="@+id/textDeadline"/>
     <ImageView
             android:layout_width="85dp"
             android:layout_height="83dp" app:srcCompat="@mipmap/ic_launcher"
@@ -26,12 +26,12 @@
             android:layout_height="wrap_content" android:id="@+id/textDeadline"
             app:layout_constraintStart_toEndOf="@+id/imageView" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toStartOf="@+id/textPriority" android:layout_marginEnd="8dp"
-            android:layout_marginTop="28dp" app:layout_constraintTop_toBottomOf="@+id/textTitle"/>
+            android:layout_marginTop="28dp" app:layout_constraintTop_toBottomOf="@+id/editTitle"/>
     <TextView
             android:text="Priority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textPriority"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@+id/textDeadline"
-            android:layout_marginTop="28dp" app:layout_constraintTop_toBottomOf="@+id/textTitle"/>
+            android:layout_marginTop="28dp" app:layout_constraintTop_toBottomOf="@+id/editTitle"/>
 </android.support.constraint.ConstraintLayout>

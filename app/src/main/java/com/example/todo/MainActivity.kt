@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity(), MyArrayAdapter.MyListener {
             if (returnString != null) {
                 arguments = returnString.split(";;")
 
-                val t = Task(arguments[1], arguments[2], 4, arguments[3].toInt())
+                val t = Task(arguments[1], arguments[2], arguments[3].toInt(), arguments[4].toInt())
 
                 if (arguments[0] == "add") {
                     database.taskDao().insertTask(t)

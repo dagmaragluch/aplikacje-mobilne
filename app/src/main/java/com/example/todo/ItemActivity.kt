@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.RadioButton
 import kotlinx.android.synthetic.main.item_layout.*
 import kotlinx.android.synthetic.main.item_layout_edit.*
 
@@ -36,8 +37,21 @@ class ItemActivity : AppCompatActivity() {
         val text3 = findViewById<View>(R.id.editPriority) as EditText
         val ePriority = text3.text.toString()
 
+
+        val selectedId = radioGroup.checkedRadioButtonId
+        val clickedButton = findViewById<RadioButton>(selectedId)
+        lateinit var eImage : String
+
+        when(clickedButton){
+            radioButton1 -> eImage = "1"
+            radioButton2 -> eImage = "2"
+            radioButton3 -> eImage = "3"
+        }
+
+        Log.d("button", "ID = $eImage")
+
         val finalString : String
-        finalString = "$option;;$eTitle;;$eDeadline;;$ePriority"
+        finalString = "$option;;$eTitle;;$eDeadline;;$eImage;;$ePriority"
 
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra(Intent.EXTRA_TEXT, finalString)

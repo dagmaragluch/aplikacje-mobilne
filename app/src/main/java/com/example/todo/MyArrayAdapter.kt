@@ -27,7 +27,6 @@ class MyArrayAdapter(context: Context, tasks: ArrayList<Task>, var listener: MyL
     override fun getView(position: Int, v: View?, parent: ViewGroup): View {
 
         var view = v
-//        val viewHolder: ItemViewHolder
         lateinit var inflater: LayoutInflater
         if (view == null) {
             inflater = LayoutInflater.from(context)
@@ -36,7 +35,7 @@ class MyArrayAdapter(context: Context, tasks: ArrayList<Task>, var listener: MyL
             viewHolder = ItemViewHolder()
             viewHolder.text = view!!.findViewById<View>(R.id.editTitle) as TextView
             viewHolder.deadline = view.findViewById<View>(R.id.textDeadline) as TextView
-//            viewHolder.image = v.findViewById<View>(R.id.imageView) as ImageView
+            viewHolder.image = view.findViewById<View>(R.id.imageView) as ImageView
             viewHolder.priority = view.findViewById<View>(R.id.textPriority) as TextView
         } else {
             viewHolder = view.tag as ItemViewHolder
@@ -47,6 +46,7 @@ class MyArrayAdapter(context: Context, tasks: ArrayList<Task>, var listener: MyL
         viewHolder.deadline!!.text = items.deadline
         viewHolder.priority!!.text = items.priority.toString()
 //        viewHolder.image!!.setImageResource(items.image)
+        viewHolder.image!!.setImageResource(setImageId(items.image))
 
 
         view.setOnClickListener {
@@ -61,6 +61,23 @@ class MyArrayAdapter(context: Context, tasks: ArrayList<Task>, var listener: MyL
         view.tag = viewHolder
         return view
     }
+
+
+    fun setImageId(i : Int) : Int{
+//        val img = findViewById<ImageView>(R.id.imageView).imageView
+        var imgResId = 0
+
+        when (i) {
+            0 -> imgResId = R.drawable.ic_launcher_round
+            1 -> imgResId = R.drawable.obraz1
+            2 -> imgResId = R.drawable.obraz2
+            3 -> imgResId = R.drawable.obraz3
+//            else -> imgResId = R.drawable.ic_launcher_round
+        }
+//        img.setImageResource(imgResId)
+        return imgResId
+    }
+
 
 
 }

@@ -1,9 +1,6 @@
 package com.example.todo
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 
 @Dao
 interface TaskDAO {
@@ -16,7 +13,13 @@ interface TaskDAO {
     @Insert
     fun insertTask(task: Task)
 
-
     @Delete
     fun deleteTask(task: Task)
+
+    @Update
+    fun updateTask(task: Task)
+
+    @Query("UPDATE TASK SET text = :text ,deadline= :deadline,image= :image, priority= :priority WHERE id LIKE :id ")
+    fun updateItem(id: Int, text: String, deadline: String, image: Int, priority: Int)
+
 }

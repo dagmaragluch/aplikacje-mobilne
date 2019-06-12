@@ -13,6 +13,9 @@ import kotlinx.android.synthetic.main.item_layout_edit.*
 
 class ItemActivity : AppCompatActivity() {
 
+    lateinit var option : String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_layout_edit)
@@ -22,6 +25,8 @@ class ItemActivity : AppCompatActivity() {
 
 
     fun onClick(view: View){
+        option = intent.getStringExtra("option")
+
         val text = findViewById<View>(R.id.editTitle) as EditText
         val eTitle = text.text.toString()
 
@@ -32,7 +37,7 @@ class ItemActivity : AppCompatActivity() {
         val ePriority = text3.text.toString()
 
         val finalString : String
-        finalString = "$eTitle;;$eDeadline;;$ePriority"
+        finalString = "$option;;$eTitle;;$eDeadline;;$ePriority"
 
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra(Intent.EXTRA_TEXT, finalString)

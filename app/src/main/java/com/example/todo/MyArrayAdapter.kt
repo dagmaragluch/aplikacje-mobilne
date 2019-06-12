@@ -5,10 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-class MyArrayAdapter(context: Context, tasks: ArrayList<Task>) :
+
+class MyArrayAdapter(context: Context, tasks: ArrayList<Task>, var listener: MyListener) :
     ArrayAdapter<Task>(context, R.layout.item_layout, tasks) {
 
-    //view holder is used to prevent findViewById calls
+
+    interface MyListener {
+        fun onInteraction(index: Int)
+        fun onDelete(index: Int)
+    }
+
     private class ItemViewHolder {
         internal var text: TextView? = null
         internal var deadline: TextView? = null
@@ -18,19 +24,19 @@ class MyArrayAdapter(context: Context, tasks: ArrayList<Task>) :
 
     private lateinit var viewHolder: ItemViewHolder
 
-    override fun getView(position: Int, view: View?, parent: ViewGroup): View {
+    override fun getView(position: Int, v: View?, parent: ViewGroup): View {
 
-        var view = view
+        var view = v
 //        val viewHolder: ItemViewHolder
-        lateinit var inflater : LayoutInflater
+        lateinit var inflater: LayoutInflater
         if (view == null) {
-             inflater = LayoutInflater.from(context)
+            inflater = LayoutInflater.from(context)
             view = inflater.inflate(R.layout.item_layout, parent, false)
 
             viewHolder = ItemViewHolder()
             viewHolder.text = view!!.findViewById<View>(R.id.editTitle) as TextView
             viewHolder.deadline = view.findViewById<View>(R.id.textDeadline) as TextView
-//            viewHolder.image = view.findViewById<View>(R.id.imageView) as ImageView
+//            viewHolder.image = v.findViewById<View>(R.id.imageView) as ImageView
             viewHolder.priority = view.findViewById<View>(R.id.textPriority) as TextView
         } else {
             viewHolder = view.tag as ItemViewHolder
@@ -42,43 +48,19 @@ class MyArrayAdapter(context: Context, tasks: ArrayList<Task>) :
         viewHolder.priority!!.text = items.priority.toString()
 //        viewHolder.image!!.setImageResource(items.image)
 
-        //shows how to handle events of views of items
-        viewHolder.text!!.setOnClickListener {
-            Toast.makeText(
-                context, "Clicked title of " + items.text,
-                Toast.LENGTH_SHORT
-            ).show()
 
-
+        view.setOnClickListener {
+            listener.onInteraction(position)
         }
-        view.tag = viewHolder
 
+        view.setOnLongClickListener {
+            listener.onDelete(position)
+            true
+        }
+
+        view.tag = viewHolder
         return view
     }
-
-
-    /**************/
-
-//    fun editTitle(){
-//        val builder = AlertDialog.Builder(context)
-//        val inflater = layoutInflater
-//        builder.setTitle("EditText")
-//        val dialogLayout = inflater.inflate(R.layout.item_layout, null)
-//        val editText = dialogLayout.findViewById<EditText>(R.id.editText)
-//        builder.setView(dialogLayout)
-//        builder.setPositiveButton("OK") { dialogInterface, i ->
-//
-//            var string = editText.text.toString()
-//            //println("STRING w editText = $string")
-//            mainFragment.temporaryClass.pictures[nr].description = string
-////                items[position]
-//            viewHolder.text!!.text = items.text
-//        }
-//        builder.show()
-//    }
-
-
-    /*************/
 
 
 }

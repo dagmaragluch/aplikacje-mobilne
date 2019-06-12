@@ -15,13 +15,25 @@ import kotlinx.android.synthetic.main.item_layout.view.*
 import java.lang.Exception
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MyArrayAdapter.MyListener {
 
     private lateinit var database: AppDatabase
     private val itemsArray = ArrayList<Task>()
     lateinit var myadapter: MyArrayAdapter
-
     private val requestCode = 0
+
+
+    override fun onDelete(index: Int) {
+        database.taskDao().deleteTask(itemsArray[index])
+        refresh()
+    }
+
+    override fun onInteraction(index: Int) {
+        val i = Intent()
+        i.setClass(this, ItemActivity::class.java)
+        i.putExtra("option", "edit$index")
+        startActivityForResult(i, requestCode)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,32 +52,17 @@ class MainActivity : AppCompatActivity() {
             itemsArray.addAll(database.taskDao().getAll())
         }
 
-        myadapter = MyArrayAdapter(this, itemsArray)
+        myadapter = MyArrayAdapter(this, itemsArray, this)
         listView1.adapter = myadapter
-
-
-        listView1.onItemLongClickListener = OnItemLongClickListener { _, _, index, _ ->
-            //            Toast.makeText(this, "$index", Toast.LENGTH_SHORT).show()
-            database.taskDao().deleteTask(itemsArray[index])
-            refresh()
-            true
-        }
 
     }
 
     fun addItem(view: View) {
         val i = Intent()
         i.setClass(this, ItemActivity::class.java)
+        i.putExtra("option", "add")
         startActivityForResult(i, requestCode)
     }
-
-    fun editItem(v: View) {
-//        val i = Intent()
-//        i.setClass(this, ItemActivity::class.java)
-////        i.putExtra("option", "edit;;$index" )
-//        startActivityForResult(i, requestCode)
-    }
-
 
     private fun refresh() {
         itemsArray.removeAll(itemsArray)
@@ -86,8 +83,18 @@ class MainActivity : AppCompatActivity() {
             if (returnString != null) {
                 arguments = returnString.split(";;")
 
-                val t = Task(arguments[0], arguments[1], 4, arguments[2].toInt())
-                database.taskDao().insertTask(t)
+                val t = Task(arguments[1], arguments[2], 4, arguments[3].toInt())
+
+                if (arguments[0] == "add") {
+                    database.taskDao().insertTask(t)
+                } else if (arguments[0].contains("edit")) {
+
+                    var index = arguments[0].substring(4).toInt()
+//                    Log.d("edit", "index = $index")
+
+                    database.taskDao().deleteTask(itemsArray[index])
+                    database.taskDao().insertTask(t)
+                }
                 refresh()
             }
         }

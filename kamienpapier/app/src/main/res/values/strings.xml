@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">kamien-papier</string>
+    <string name="tytul">Gra kamień - papier - nożyce</string>
+    <string name="s1">kamień</string>
+    <string name="s2">papier</string>
+    <string name="s3">nożyce</string>
+    <string name="co_wybierasz">Co wybierasz?</string>
+
+
+
+</resources>
